@@ -1,28 +1,18 @@
-import { WebSocketServer } from 'ws';
+import WebSocket, { WebSocketServer } from "ws";
+const wss = new WebSocketServer({ port: 8080 })
 
-const server = new WebSocketServer({
-    port:8081
-})
+interface Room {
+    sockets: WebSocket[]
+}
 
-let totalConnection = 0;
-
-server.on('connection',(socket)=>{
-    console.log("Client connected",totalConnection++)
+const rooms: Record<string, Room> = {}
 
 
-    socket.on('message',(message)=>{
-        console.log(`Received message from Client ${totalConnection} ${message}`)
-        socket.send(`Server  : ${message}`)
-    });
 
-    if (totalConnection >3) {
-        socket.close();
-    }
-
-    socket.on('close',()=>{
-        console.log('Clinet disconnected')
+wss.on('connection', function (ws) {
+    ws.on('error', console.error)
+    ws.on('message', function message(data) {
+        console.log('received %s', data)
     })
+    ws.send('something')
 })
-
-
-console.log('WebSocket server is running on ws://localhost:8081');
