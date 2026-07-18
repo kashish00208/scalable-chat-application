@@ -11,20 +11,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11.5.2",
-      "onFail": "download"
-    }
-  },
-  "type": "module",
-  "dependencies": {
-    "@jest/globals": "^30.4.1",
-    "ws": "^8.21.0"
-  },
+  "type": "commonjs",
   "devDependencies": {
     "@types/ws": "^8.18.1",
-    "typescript": "^6.0.3"
+    "express": "^5.2.1",
+    "typescript": "^7.0.2",
+    "ws": "^8.21.1"
   }
 }
