@@ -1,15 +1,27 @@
-import WebSocket, { WebSocketServer } from 'ws';
+import { WebSocketServer } from "ws";
 
-const wss = new WebSocketServer({ port: 8080 });
+const wss = new WebSocketServer({ port: 3000 });
 
-wss.on('connection', function connection(ws) {
-  ws.on('error', console.error);
+let totalConnection = 0;
 
-  ws.on('message', function message(data, isBinary) {
-    wss.clients.forEach(function each(client) {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(data, { binary: isBinary });
-      }
-    });
+wss.on("connection", (socket) => {
+  totalConnection++;
+  console.log("Client connected");
+  console.log("Total clients:", totalConnection);
+
+  socket.on("message", (data) => {
+    console.log(data.toString());
+
+    socket.send(
+      JSON.stringify({
+        message: "Received!",
+      })
+    );
+  });
+
+  socket.on("close", () => {
+    totalConnection--;
+    console.log("Client disconnected");
+    console.log("Total clients:", totalConnection);
   });
 });

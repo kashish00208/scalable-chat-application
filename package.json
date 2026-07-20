@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+     "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +18,8 @@
     "express": "^5.2.1",
     "typescript": "^7.0.2",
     "ws": "^8.21.1"
+  },
+  "dependencies": {
+    "jest": "^30.4.2"
   }
 }
